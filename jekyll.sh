@@ -11,7 +11,7 @@ ip="$(docker-machine ip default)"
 echo "IP=$ip"
 
 if [ "${1:-}" == "" ] ; then
-  args=(/bin/sh -c 'jekyll serve --force_polling')
+  args=(/bin/sh -c 'bundle update; bundle exec jekyll serve --trace --force_polling')
 else
   args=$@
 fi

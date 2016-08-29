@@ -2,16 +2,8 @@
 
 set -e -x -u
 
-docker-machine start default || true 
-
-eval "$(docker-machine env default)"
-
-ip="$(docker-machine ip default)"
-
-echo "IP=$ip"
-
 if [ "${1:-}" == "" ] ; then
-  args=(/bin/sh -c 'bundle update; bundle exec jekyll serve --trace --force_polling')
+  args=(/bin/sh -c 'bundle update; while true; do bundle exec jekyll serve --trace --force_polling; read -p "Restart?"; done')
 else
   args=$@
 fi
